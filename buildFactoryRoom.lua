@@ -1,69 +1,32 @@
-function digForward(blocks)
-  for n = 1, blocks, 1 do
-    turtle.dig()
-    turtle.forward()
-  end
-end
-
-function digUp(blocks)
-  for n = 1, blocks, 1 do
-    turtle.digUp()
-    turtle.up()
-  end
-end
-
-function down(blocks)
-  for n = 1, blocks, 1 do
-    turtle.down()
-  end
-end
-
-function foward(blocks)
-  for n = 1, blocks, 1 do
-    turtle.forward()
-  end
-end
-
-function back(blocks)
-  for n = 1, blocks, 1 do
-    turtle.back()
-  end
-end
-
-function right(blocks)
-  turtle.turnRight()
-  forward(blocks)
-  turtle.turnLeft()
-end
+local tw = require("turtle_wrapper")
 
 function digLine(height, length)
-  if n = 1, length, 1 do
-    digUp(height)
-    down(height)
-    if n < length then
-      forward(1)
-    end
+  for n = 1, length, 1 do
+    tw.digForward(1)
+    tw.digUp(height)
+    tw.moveDown(height)
   end
-  back(length)
+  tw.moveBack(length)
 end
 
 function digSquare(height, side)
   for n = 1, side, 1 do
-    digLine(height - 1, side - 1)
-    if n < side do
-      right(1)
+    tw.digUp(height-1)
+    tw.moveDown(height-1)
+    tw.digLine(height-1, side-1)
+    if n < side then
+      tw.digRight(1)
     end
   end
 end
 
 function initialPosition()
-  digForward()
+  tw.digForward(1)
   turtle.digUp()
 
-  digForward()
+  tw.digForward(1)
   turtle.turnLeft()
-  digForward()
-  digForward()
+  tw.digForward(2)
   turtle.turnRight()
 end
 
